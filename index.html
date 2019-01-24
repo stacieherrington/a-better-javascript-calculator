@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>A Calculator Using JavaScript</title>
-        <script src="script.js"></script>
+        
         <style>
             button.same-width { width: 60px; }
         </style>
@@ -16,30 +16,33 @@
         </table>
         <table style="background-color:lightblue" border="0">
             <tr>
-                <td><button class="same-width">7</button></td>
-                <td><button class="same-width">8</button></td>
-                <td><button class="same-width">9</button></td>
-                <td><button class="same-width">&divide;</button></td>
+                <td><button class="same-width" id="button7">7</button></td>
+                <td><button class="same-width" id="button8">8</button></td>
+                <td><button class="same-width" id="button9">9</button></td>
+                <td><button class="same-width" id="buttonDivide">&divide;</button></td>
             </tr>
             <tr>
-                <td><button class="same-width">4</button></td>
-                <td><button class="same-width">5</button></td>
-                <td><button class="same-width">6</button></td>
-                <td><button class="same-width">*</button></td>
+                <td><button class="same-width" id="button4">4</button></td>
+                <td><button class="same-width" id="button5">5</button></td>
+                <td><button class="same-width" id=button6>6</button></td>
+                <td><button class="same-width" id=buttonMultiply>*</button></td>
             </tr>
             <tr>
-                <td><button class="same-width">1</button></td>
-                <td><button class="same-width">2</button></td>
-                <td><button class="same-width">3</button></td>
-                <td><button class="same-width">-</button></td>
+                <td><button class="same-width" id="button1">1</button></td>
+                <td><button class="same-width" id="button2">2</button></td>
+                <td><button class="same-width" id="button3">3</button></td>
+                <td><button class="same-width" id="buttonSubtract">-</button></td>
             </tr>
             <tr>
-                <td><button class="same-width">0</button></td>
-                <td><button class="same-width">.</button></td>
-                <td><button class="same-width">+</button></td>
-                <td><button class="same-width">=</button></td>
+                <td><button class="same-width" id="button0">0</button></td>
+                <td><button class="same-width" id="buttonDecimal">.</button></td>
+                <td><button class="same-width" id="buttonAdd">+</button></td>
+                <td><button class="same-width" id="buttonEquals">=</button></td>
             </tr>
 
         </table>
+
+        <script src="script.js"></script>
+
     </body>
 </html>
