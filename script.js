@@ -56,6 +56,9 @@ document.getElementById("button0").addEventListener("click", function(){
 document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (digitsString.indexOf('.') > -1) {}
     else {digitsString = digitsString + "."}
+    if (digitsString == ".") {
+        digitsString = "0."
+    }
     console.log(digitsString);
 });
 
@@ -94,6 +97,16 @@ document.getElementById("buttonDivide").addEventListener("click", function(){
     digitsString = ""
     operationType = "operationDivide"
 });
+
+document.getElementById("buttonEquals").addEventListener("click", function(){
+    if (digitsString !== "") {
+        currentTotal = operatorButtonStuff(operationType, digitsString)
+    }
+    console.log(currentTotal)
+    digitsString = ""
+});
+
+
 
 function performOperation(lastResult, newNumberEntered, arithmeticOperation) {
     switch(arithmeticOperation) {
