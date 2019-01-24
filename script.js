@@ -106,6 +106,12 @@ document.getElementById("buttonEquals").addEventListener("click", function(){
     digitsString = ""
 });
 
+document.getElementById("allClear").addEventListener("click", function(){
+    digitsString = ""
+    operationType = ""
+    currentTotal = 0
+    console.log(0)
+});
 
 
 function performOperation(lastResult, newNumberEntered, arithmeticOperation) {
