@@ -5,51 +5,61 @@ let operationType = ""
 
 document.getElementById("button7").addEventListener("click", function(){
     digitsString = digitsString + "7"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button8").addEventListener("click", function(){
     digitsString = digitsString + "8"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button9").addEventListener("click", function(){
     digitsString = digitsString + "9"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button4").addEventListener("click", function(){
     digitsString = digitsString + "4"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button5").addEventListener("click", function(){
     digitsString = digitsString + "5"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button6").addEventListener("click", function(){
     digitsString = digitsString + "6"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button1").addEventListener("click", function(){
     digitsString = digitsString + "1"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button2").addEventListener("click", function(){
     digitsString = digitsString + "2"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button3").addEventListener("click", function(){
     digitsString = digitsString + "3"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
 document.getElementById("button0").addEventListener("click", function(){
     digitsString = digitsString + "0"
+    writeToDisplay(digitsString)
     console.log(digitsString);
 });
 
@@ -59,14 +69,14 @@ document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (digitsString == ".") {
         digitsString = "0."
     }
-    console.log(digitsString);
+    writeToDisplay(digitsString);
 });
 
 document.getElementById("buttonAdd").addEventListener("click", function(){
     if (digitsString !== "") {
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
-    console.log(currentTotal)
+    writeToDisplay(currentTotal)
     digitsString = ""
     operationType = "operationAdd"
 });
@@ -75,7 +85,7 @@ document.getElementById("buttonSubtract").addEventListener("click", function(){
     if (digitsString !== "") {
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
-    console.log(currentTotal)
+    writeToDisplay(currentTotal)
     digitsString = ""
     operationType = "operationSubtract"
 });
@@ -84,7 +94,7 @@ document.getElementById("buttonMultiply").addEventListener("click", function(){
     if (digitsString !== "") {
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
-    console.log(currentTotal)
+    writeToDisplay(currentTotal)
     digitsString = ""
     operationType = "operationMultiply"
 });
@@ -93,7 +103,7 @@ document.getElementById("buttonDivide").addEventListener("click", function(){
     if (digitsString !== "") {
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
-    console.log(currentTotal)
+    writeToDisplay(currentTotal)
     digitsString = ""
     operationType = "operationDivide"
 });
@@ -102,17 +112,17 @@ document.getElementById("buttonEquals").addEventListener("click", function(){
     if (digitsString !== "") {
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
-    console.log(currentTotal)
+    writeToDisplay(currentTotal)
     digitsString = ""
+    operationType = ""
 });
 
 document.getElementById("allClear").addEventListener("click", function(){
     digitsString = ""
     operationType = ""
     currentTotal = 0
-    console.log(0)
+    writeToDisplay("0")
 });
-
 
 function performOperation(lastResult, newNumberEntered, arithmeticOperation) {
     switch(arithmeticOperation) {
@@ -126,8 +136,15 @@ function performOperation(lastResult, newNumberEntered, arithmeticOperation) {
             return(lastResult * newNumberEntered)
             break;
         case "operationDivide":
+            if (newNumberEntered == 0) {
+                window.alert("No.")
+                return(lastResult)
+            }
+            else {
             return(lastResult / newNumberEntered)
+            }
             break;
+            
     }
 }
 
@@ -140,7 +157,10 @@ function operatorButtonStuff(currentOperationType, stringOfDigits) {
     }
 }
 
-/*
+function writeToDisplay(stringToDisplay) {
+    document.getElementById("display").innerHTML = stringToDisplay
+}
+
 /*
 Done: digitsString is a string variable that concatenates as number buttons and/or the decimal are clicked.
 
@@ -152,6 +172,9 @@ Done: There needs to be a variable called operationType that will be set to eith
 
 Done: I think there needs to be a function called performOperation. It will contain a switch/case thing for each operation, and will return the new value of currentTotal. I also added an operatorButtonStuff to cut down on some repetitive code that I would have needed to type under every operator button. I could probably cut this down further but I wanted to make sure I could get something working first. 
 
-Still needs: clear button and = button functionality.
+Done: clear button and = button functionality.
 
+Done: divide by zero problem
+
+Possible improvements: event listening for keyboard strokes, such as enter, backspace, number keys, and operators
 */
