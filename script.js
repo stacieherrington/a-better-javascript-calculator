@@ -1,11 +1,10 @@
 let currentTotal = 0
 let digitsString = ""
+let numberInMemory = 0
 let operationType = ""
 let operatorArray = ["Multiply", "Divide", "Add", "Subtract"]
-let i
-let x
 
-for (i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     let buttonNumber = i.toString()
     document.getElementById("button" + buttonNumber).addEventListener("click", function (){
         digitsString = digitsString + buttonNumber
@@ -13,18 +12,41 @@ for (i = 0; i < 10; i++) {
     });
 }
 
-for (x = 0; x < 4; x++) {
-    let operatorIndex = x
-        document.getElementById("button" + operatorArray[operatorIndex]).addEventListener("click", function(){
+for (let x = 0; x < 4; x++) {
+    let operatorText = operatorArray[x]
+        document.getElementById("button" + operatorText).addEventListener("click", function(){
         if (digitsString !== "") {
             currentTotal = operatorButtonStuff(operationType, digitsString)
         }
         writeToDisplay(currentTotal)
         digitsString = ""
-        operationType = "operation" + operatorArray[operatorIndex]
+        operationType = "operation" + operatorText
     });
 
 }
+
+document.getElementById("buttonMAdd").addEventListener("click", function(){
+    if (digitsString = "") {
+        numberInMemory = numberInMemory + currentTotal
+        console.log(numberInMemory)
+    }
+    else {
+        numberInMemory = numberInMemory + parseFloat(digitsString)
+        console.log(numberInMemory)
+    }
+});
+
+// document.getElementById("buttonMSubtract").addEventListener("click", function() {
+//
+// });
+
+// document.getElementById("buttonMRecall").addEventListener("click", function() {
+//     writeToDisplay(numberInMemory)
+// });
+
+// document.getElementById("buttonMClear").addEventListener("click", function() {
+    //
+// });
 
 document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (digitsString.indexOf('.') > -1) {}
@@ -104,5 +126,9 @@ Done: clear button and = button functionality.
 
 Done: divide by zero problem
 
-Possible improvements: event listening for keyboard strokes, such as enter, backspace, number keys, and operators
+Done: write loop for operator buttons.
+
+Next: add memory functionality with MC, MR, M+ and M-.
+
+Other improvement ideas: event listening for keyboard strokes, such as enter, backspace, number keys, and operators
 */
