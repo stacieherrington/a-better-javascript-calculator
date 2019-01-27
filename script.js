@@ -1,7 +1,9 @@
 let currentTotal = 0
 let digitsString = ""
 let operationType = ""
+let operatorArray = ["Multiply", "Divide", "Add", "Subtract"]
 let i
+let x
 
 for (i = 0; i < 10; i++) {
     let buttonNumber = i.toString()
@@ -11,6 +13,19 @@ for (i = 0; i < 10; i++) {
     });
 }
 
+for (x = 0; x < 4; x++) {
+    let operatorIndex = x
+        document.getElementById("button" + operatorArray[operatorIndex]).addEventListener("click", function(){
+        if (digitsString !== "") {
+            currentTotal = operatorButtonStuff(operationType, digitsString)
+        }
+        writeToDisplay(currentTotal)
+        digitsString = ""
+        operationType = "operation" + operatorArray[operatorIndex]
+    });
+
+}
+
 document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (digitsString.indexOf('.') > -1) {}
     else {digitsString = digitsString + "."}
@@ -18,42 +33,6 @@ document.getElementById("buttonDecimal").addEventListener("click", function(){
         digitsString = "0."
     }
     writeToDisplay(digitsString);
-});
-
-document.getElementById("buttonAdd").addEventListener("click", function(){
-    if (digitsString !== "") {
-        currentTotal = operatorButtonStuff(operationType, digitsString)
-    }
-    writeToDisplay(currentTotal)
-    digitsString = ""
-    operationType = "operationAdd"
-});
-
-document.getElementById("buttonSubtract").addEventListener("click", function(){
-    if (digitsString !== "") {
-        currentTotal = operatorButtonStuff(operationType, digitsString)
-    }
-    writeToDisplay(currentTotal)
-    digitsString = ""
-    operationType = "operationSubtract"
-});
-
-document.getElementById("buttonMultiply").addEventListener("click", function(){
-    if (digitsString !== "") {
-        currentTotal = operatorButtonStuff(operationType, digitsString)
-    }
-    writeToDisplay(currentTotal)
-    digitsString = ""
-    operationType = "operationMultiply"
-});
-
-document.getElementById("buttonDivide").addEventListener("click", function(){
-    if (digitsString !== "") {
-        currentTotal = operatorButtonStuff(operationType, digitsString)
-    }
-    writeToDisplay(currentTotal)
-    digitsString = ""
-    operationType = "operationDivide"
 });
 
 document.getElementById("buttonEquals").addEventListener("click", function(){
