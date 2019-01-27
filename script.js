@@ -2,7 +2,10 @@ let currentTotal = 0
 let digitsString = ""
 let numberInMemory = 0
 let operationType = ""
+let numberEntered
+let historyText = ""
 let operatorArray = ["Multiply", "Divide", "Add", "Subtract"]
+// let operatorSymbols = [" * ", " &divide; ", " + ", " - "]
 
 for (let i = 0; i < 10; i++) {
     let buttonNumber = i.toString()
@@ -19,8 +22,10 @@ for (let x = 0; x < 4; x++) {
             currentTotal = operatorButtonStuff(operationType, digitsString)
         }
         writeToDisplay(currentTotal)
+        numberEntered = digitsString
         digitsString = ""
         operationType = "operation" + operatorText
+        writeToHistory(concatenateHistoryText(numberEntered, operationType))
     });
 
 }
@@ -73,6 +78,8 @@ document.getElementById("buttonEquals").addEventListener("click", function(){
     console.log(currentTotal)
     digitsString = ""
     operationType = ""
+    historyText = currentTotal
+    writeToHistory(currentTotal)
 });
 
 document.getElementById("allClear").addEventListener("click", function(){
@@ -80,6 +87,8 @@ document.getElementById("allClear").addEventListener("click", function(){
     operationType = ""
     currentTotal = 0
     writeToDisplay("0")
+    historyText = ""
+    writeToHistory("&nbsp;")
 });
 
 function performOperation(lastResult, newNumberEntered, arithmeticOperation) {
@@ -119,6 +128,49 @@ function writeToDisplay(stringToDisplay) {
     document.getElementById("display").innerHTML = stringToDisplay
 }
 
+function writeToHistory(stringOfHistory) {
+    document.getElementById("history").innerHTML = stringOfHistory
+}
+
+// If startingNumber == "", change the last three digits in historyText to be getOperatorSymbol(thisOperation) and save that as historyText. This should be its own function, probably.
+function concatenateHistoryText(startingNumber, thisOperation) {
+    if (startingNumber == "") {
+        historyText = deleteLastOperatorSymbol(historyText)
+    }
+    historyText = historyText + startingNumber + getOperatorSymbol(thisOperation)
+    return historyText
+}
+
+function getOperatorSymbol(currentOperation) {
+    switch(currentOperation) {
+        case "operationAdd":
+            return " + "
+            break;
+        case "operationSubtract":
+            return " - "
+            break;
+        case "operationMultiply":
+            return " * "
+            break;
+        case "operationDivide":
+            return " &divide; "
+            break;
+    }
+}
+
+function deleteLastOperatorSymbol(historyString) {
+    let historyLength = historyString.length
+    if (historyString.substr(-10, historyLength - 1) == " &divide; ") {
+        let newString = historyString.substr(0, historyLength - 10)
+        return newString
+    }
+    else if (historyLength > 3) {
+        let newString = historyString.substr(0, historyLength - 3)
+        return newString
+    }
+    else { return historyString }
+}
+
 /*
 Done: digitsString is a string variable that concatenates as number buttons and/or the decimal button are clicked.
 
@@ -136,7 +188,9 @@ Done: divide by zero problem
 
 Done: write loop for operator buttons.
 
-Next: add memory functionality with MC, MR, M+ and M-.
+Done: add memory functionality with MC, MR, M+ and M-.
+
+Next: add a history line above the calculator
 
 Other improvement ideas: event listening for keyboard strokes, such as enter, backspace, number keys, and operators
 */
