@@ -61,6 +61,7 @@ document.getElementById("buttonEquals").addEventListener("click", function(){
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
     writeToDisplay(currentTotal)
+    console.log(currentTotal)
     digitsString = ""
     operationType = ""
 });
