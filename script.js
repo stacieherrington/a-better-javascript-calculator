@@ -26,7 +26,7 @@ for (let x = 0; x < 4; x++) {
 }
 
 document.getElementById("buttonMAdd").addEventListener("click", function(){
-    if (digitsString = "") {
+    if (digitsString == "") {
         numberInMemory = numberInMemory + currentTotal
         console.log(numberInMemory)
     }
@@ -36,17 +36,25 @@ document.getElementById("buttonMAdd").addEventListener("click", function(){
     }
 });
 
-// document.getElementById("buttonMSubtract").addEventListener("click", function() {
-//
-// });
+document.getElementById("buttonMSubtract").addEventListener("click", function() {
+    if (digitsString == "") {
+        numberInMemory = numberInMemory - currentTotal
+        console.log(numberInMemory)
+    }
+    else {
+        numberInMemory = numberInMemory - parseFloat(digitsString)
+        console.log(numberInMemory)
+    }
+});
 
-// document.getElementById("buttonMRecall").addEventListener("click", function() {
-//     writeToDisplay(numberInMemory)
-// });
+document.getElementById("buttonMRecall").addEventListener("click", function() {
+    writeToDisplay(numberInMemory)
+});
 
-// document.getElementById("buttonMClear").addEventListener("click", function() {
-    //
-// });
+document.getElementById("buttonMClear").addEventListener("click", function() {
+    numberInMemory = 0
+    console.log(numberInMemory)
+});
 
 document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (digitsString.indexOf('.') > -1) {}
