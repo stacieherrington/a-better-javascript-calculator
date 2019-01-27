@@ -5,7 +5,6 @@ let operationType = ""
 let numberEntered
 let historyText = ""
 let operatorArray = ["Multiply", "Divide", "Add", "Subtract"]
-// let operatorSymbols = [" * ", " &divide; ", " + ", " - "]
 
 for (let i = 0; i < 10; i++) {
     let buttonNumber = i.toString()
@@ -190,7 +189,7 @@ Done: write loop for operator buttons.
 
 Done: add memory functionality with MC, MR, M+ and M-.
 
-Next: add a history line above the calculator
+Done: add a history line above the calculator
 
 Other improvement ideas: event listening for keyboard strokes, such as enter, backspace, number keys, and operators
 */
