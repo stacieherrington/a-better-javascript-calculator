@@ -1,67 +1,15 @@
 let currentTotal = 0
 let digitsString = ""
 let operationType = ""
+let i
 
-
-document.getElementById("button7").addEventListener("click", function(){
-    digitsString = digitsString + "7"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button8").addEventListener("click", function(){
-    digitsString = digitsString + "8"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button9").addEventListener("click", function(){
-    digitsString = digitsString + "9"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button4").addEventListener("click", function(){
-    digitsString = digitsString + "4"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button5").addEventListener("click", function(){
-    digitsString = digitsString + "5"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button6").addEventListener("click", function(){
-    digitsString = digitsString + "6"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button1").addEventListener("click", function(){
-    digitsString = digitsString + "1"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button2").addEventListener("click", function(){
-    digitsString = digitsString + "2"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button3").addEventListener("click", function(){
-    digitsString = digitsString + "3"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
-
-document.getElementById("button0").addEventListener("click", function(){
-    digitsString = digitsString + "0"
-    writeToDisplay(digitsString)
-    console.log(digitsString);
-});
+for (i = 0; i < 10; i++) {
+    let buttonNumber = i.toString()
+    document.getElementById("button" + buttonNumber).addEventListener("click", function (){
+        digitsString = digitsString + buttonNumber
+        writeToDisplay(digitsString)
+    });
+}
 
 document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (digitsString.indexOf('.') > -1) {}
@@ -144,7 +92,7 @@ function performOperation(lastResult, newNumberEntered, arithmeticOperation) {
             return(lastResult / newNumberEntered)
             }
             break;
-            
+
     }
 }
 
@@ -162,7 +110,7 @@ function writeToDisplay(stringToDisplay) {
 }
 
 /*
-Done: digitsString is a string variable that concatenates as number buttons and/or the decimal are clicked.
+Done: digitsString is a string variable that concatenates as number buttons and/or the decimal button are clicked.
 
 Done: There needs to be a way to check, when the decimal button is clicked, whether or not digitsString already contains a decimal character.
 
@@ -170,7 +118,7 @@ Done: When an operator button is clicked, digitsString should be parsed as a flo
 
 Done: There needs to be a variable called operationType that will be set to either operationAdd, operationSubtract, operationMultiply, or operationDivide by the click event on the operator buttons.
 
-Done: I think there needs to be a function called performOperation. It will contain a switch/case thing for each operation, and will return the new value of currentTotal. I also added an operatorButtonStuff to cut down on some repetitive code that I would have needed to type under every operator button. I could probably cut this down further but I wanted to make sure I could get something working first. 
+Done: I think there needs to be a function called performOperation. It will contain a switch/case thing for the operations, and will return the new value of currentTotal. I also added an operatorButtonStuff to cut down on some repetitive code that I would have needed to type under every operator button. I could probably cut this down further but I wanted to make sure I could get something working first. (Update: cut it down a lot by writing a loop.)
 
 Done: clear button and = button functionality.
 
