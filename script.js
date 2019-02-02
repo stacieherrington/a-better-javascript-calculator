@@ -4,83 +4,38 @@ let numberInMemory = 0
 let operationType = ""
 let numberEntered
 let historyText = ""
-let operatorArray = ["Multiply", "Divide", "Add", "Subtract"]
+let logText = ""
+let numberLastEntered
 
-for (let i = 0; i < 10; i++) {
-    let buttonNumber = i.toString()
-    document.getElementById("button" + buttonNumber).addEventListener("click", function (){
-        digitsString = digitsString + buttonNumber
-        writeToDisplay(digitsString)
-    });
-}
-
-for (let x = 0; x < 4; x++) {
-    let operatorText = operatorArray[x]
-        document.getElementById("button" + operatorText).addEventListener("click", function(){
-        if (digitsString !== "") {
-            currentTotal = operatorButtonStuff(operationType, digitsString)
-        }
-        writeToDisplay(currentTotal)
-        numberEntered = digitsString
-        digitsString = ""
-        operationType = "operation" + operatorText
-        writeToHistory(concatenateHistoryText(numberEntered, operationType))
-    });
-
-}
-
-document.getElementById("buttonMAdd").addEventListener("click", function(){
-    if (digitsString == "") {
-        numberInMemory = numberInMemory + currentTotal
-        console.log(numberInMemory)
-    }
-    else {
-        numberInMemory = numberInMemory + parseFloat(digitsString)
-        console.log(numberInMemory)
-    }
-});
-
-document.getElementById("buttonMSubtract").addEventListener("click", function() {
-    if (digitsString == "") {
-        numberInMemory = numberInMemory - currentTotal
-        console.log(numberInMemory)
-    }
-    else {
-        numberInMemory = numberInMemory - parseFloat(digitsString)
-        console.log(numberInMemory)
-    }
-});
-
-document.getElementById("buttonMRecall").addEventListener("click", function() {
-    writeToDisplay(numberInMemory)
-});
-
-document.getElementById("buttonMClear").addEventListener("click", function() {
-    numberInMemory = 0
-    console.log(numberInMemory)
-});
-
+// DECIMAL
 document.getElementById("buttonDecimal").addEventListener("click", function(){
-    if (digitsString.indexOf('.') > -1) {}
-    else {digitsString = digitsString + "."}
+    if (digitsString.indexOf('.') <= -1) {
+        digitsString = digitsString + "."
+    }
+
     if (digitsString == ".") {
         digitsString = "0."
     }
     writeToDisplay(digitsString);
 });
 
+// something is happening during equals that causes--if the next operation is carried out without clicking the AC button--the history string to become [object Undefined] and then the last three characters are deleted (from deleteLastOperator) because the value that is passed in as startingNumber to concatenateHistoryText is "".
+// EQUALS
 document.getElementById("buttonEquals").addEventListener("click", function(){
     if (digitsString !== "") {
         currentTotal = operatorButtonStuff(operationType, digitsString)
     }
     writeToDisplay(currentTotal)
     console.log(currentTotal)
+    numberLastEntered = parseFloat(digitsString)
     digitsString = ""
     operationType = ""
-    historyText = currentTotal
+    appendToLog(concatenateLogText(historyText, numberLastEntered, currentTotal))
+    historyText = ""
     writeToHistory(currentTotal)
 });
 
+// AC
 document.getElementById("allClear").addEventListener("click", function(){
     digitsString = ""
     operationType = ""
@@ -131,13 +86,28 @@ function writeToHistory(stringOfHistory) {
     document.getElementById("history").innerHTML = stringOfHistory
 }
 
-// If startingNumber == "", change the last three digits in historyText to be getOperatorSymbol(thisOperation) and save that as historyText. This should be its own function, probably.
+function appendToLog(stringToBeLogged) {
+    let para = document.createElement("p");
+    para.innerHTML = stringToBeLogged
+    // let node = document.createTextNode(stringToBeLogged);
+    // para.appendChild(node);
+    let element = document.getElementById("log");
+    element.appendChild(para);
+
+}
+
 function concatenateHistoryText(startingNumber, thisOperation) {
     if (startingNumber == "") {
         historyText = deleteLastOperatorSymbol(historyText)
     }
     historyText = historyText + startingNumber + getOperatorSymbol(thisOperation)
     return historyText
+}
+
+function concatenateLogText(stringFromHistory, lastNumberEntered, totalToLog) {
+    let stringToBeLogged = stringFromHistory + lastNumberEntered + " = " + totalToLog + "\n"
+    return stringToBeLogged
+    console.log(stringToBeLogged)
 }
 
 function getOperatorSymbol(currentOperation) {
@@ -159,7 +129,10 @@ function getOperatorSymbol(currentOperation) {
 
 function deleteLastOperatorSymbol(historyString) {
     let historyLength = historyString.length
-    if (historyString.substr(-10, historyLength - 1) == " &divide; ") {
+    if (historyLength < 11) {
+        return historyString
+    }
+    else if (historyString.substr(-10, historyLength - 1) == " &divide; ") {
         let newString = historyString.substr(0, historyLength - 10)
         return newString
     }
@@ -190,6 +163,8 @@ Done: write loop for operator buttons.
 Done: add memory functionality with MC, MR, M+ and M-.
 
 Done: add a history line above the calculator
+
+Next: add a log of all operations performed to completion (equals button) underneath the calculator.
 
 Other improvement ideas: event listening for keyboard strokes, such as enter, backspace, number keys, and operators
 */
